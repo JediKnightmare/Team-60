@@ -28,7 +28,8 @@ public class MainActivity2 extends AppCompatActivity {
         setIncomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getApplicationContext(), AddIncomeActivity.class));
+                finish();
             }
         });
 

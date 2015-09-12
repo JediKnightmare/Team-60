@@ -12,13 +12,14 @@ public class IncomeSQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_income = "income";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_DATE = "_date";
+    public static final String COLUMN_AMT = "amount";
     public static final String COLUMN_NOTE = "note";
 
     private static final String DATABASE_NAME = "income.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE = "CREATE TABLE "+ TABLE_income + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_DATE + " DATE NOT NULL," + COLUMN_NOTE + " TEXT);";
+            + COLUMN_AMT + " INTEGER NOT NULL, " + COLUMN_DATE + " DATE NOT NULL," + COLUMN_NOTE + " TEXT);";
 
     public IncomeSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

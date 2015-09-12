@@ -21,7 +21,7 @@ public class IncomeDataSource {
     private IncomeSQLiteHelper dbHelper;
 
     private String[] allColumns = { IncomeSQLiteHelper.COLUMN_ID,
-            IncomeSQLiteHelper.COLUMN_DATE, IncomeSQLiteHelper.COLUMN_NOTE };
+            IncomeSQLiteHelper.COLUMN_AMT ,IncomeSQLiteHelper.COLUMN_DATE, IncomeSQLiteHelper.COLUMN_NOTE };
 
     public IncomeDataSource(Context context)    {
         dbHelper = new IncomeSQLiteHelper(context);
@@ -35,10 +35,11 @@ public class IncomeDataSource {
         dbHelper.close();
     }
 
-    public IncomeData createIncome(Date date, String note)  {
+    public IncomeData createIncome(Date date, String note, float amount)  {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ContentValues contentValues = new ContentValues();
         contentValues.put(IncomeSQLiteHelper.COLUMN_DATE, simpleDateFormat.format(date));
+        contentValues.put(IncomeSQLiteHelper.COLUMN_AMT, amount);
         contentValues.put(IncomeSQLiteHelper.COLUMN_NOTE, note);
 
         long insertId = database.insert(IncomeSQLiteHelper.TABLE_income, null,
@@ -67,7 +68,8 @@ public class IncomeDataSource {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        incomeData.setNote(cursor.getString(2));
+        incomeData.setAmount(cursor.getFloat(2));
+        incomeData.setNote(cursor.getString(3));
         return incomeData;
     }
 

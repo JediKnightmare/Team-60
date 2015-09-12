@@ -13,23 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:id="@+id/income_amount"/>
+        android:id="@+id/income_amount"
+        android:hint="Income Amount"/>
     
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
-        android:id="@+id/date"/>
+        android:id="@+id/date1"
+        android:hint="Set date"
+        android:clickable="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/income_note"/>
+        android:id="@+id/income_note"
+        android:hint="Note"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_income"
-        android:id="@+id/add_income_button"/>
+        android:id="@+id/add_income_button"
+        android:layout_gravity="right" />
 
 </LinearLayout>

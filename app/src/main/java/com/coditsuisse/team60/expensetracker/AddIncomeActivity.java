@@ -30,6 +30,9 @@ public class AddIncomeActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
 
+        incomeDataSource = new IncomeDataSource(this);
+        incomeDataSource.open();
+
         Button button = (Button) findViewById(R.id.add_income_button);
         button.setOnClickListener(this);
     }
@@ -73,11 +76,11 @@ public class AddIncomeActivity extends AppCompatActivity implements View.OnClick
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                incomeDataSource.createIncome(date, note);
+                incomeDataSource.createIncome(date, note, amount);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
-            case R.id.date:
+            case R.id.date1:
                 showDatePickerDialog(view);
                 break;
         }
