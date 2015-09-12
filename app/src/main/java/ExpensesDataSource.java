@@ -33,11 +33,11 @@ public class ExpensesDataSource {
         dbHelper.close();
     }
 
-    public ExpenseData createExpense(String catergory, Date date, String note)  {
+    public ExpenseData createExpense(String category, Date date, String note)  {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ContentValues contentValues = new ContentValues();
         contentValues.put(ExpenseSQLiteHelper.COLUMN_DATE, simpleDateFormat.format(date));
-        contentValues.put(ExpenseSQLiteHelper.COLUMN_CATEGORY, catergory);
+        contentValues.put(ExpenseSQLiteHelper.COLUMN_CATEGORY, category);
         contentValues.put(ExpenseSQLiteHelper.COLUMN_NOTE, note);
 
         long insertId = database.insert(ExpenseSQLiteHelper.TABLE_expenses, null,
