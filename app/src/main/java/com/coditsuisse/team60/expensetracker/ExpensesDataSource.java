@@ -1,3 +1,5 @@
+package com.coditsuisse.team60.expensetracker;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +21,7 @@ public class ExpensesDataSource {
     private ExpenseSQLiteHelper dbHelper;
 
     private String[] allColumns = { ExpenseSQLiteHelper.COLUMN_ID,
-            ExpenseSQLiteHelper.COLUMN_DATE, ExpenseSQLiteHelper.COLUMN_CATEGORY, ExpenseSQLiteHelper.COLUMN_NOTE };
+            ExpenseSQLiteHelper.COLUMN_DATE, ExpenseSQLiteHelper.COLUMN_AMT, ExpenseSQLiteHelper.COLUMN_CATEGORY, ExpenseSQLiteHelper.COLUMN_NOTE };
 
     public ExpensesDataSource(Context context) {
         dbHelper = new ExpenseSQLiteHelper(context);
@@ -33,10 +35,11 @@ public class ExpensesDataSource {
         dbHelper.close();
     }
 
-    public ExpenseData createExpense(String category, Date date, String note)  {
+    public ExpenseData createExpense(String category, Date date, String note, float amount)  {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ContentValues contentValues = new ContentValues();
         contentValues.put(ExpenseSQLiteHelper.COLUMN_DATE, simpleDateFormat.format(date));
+        contentValues.put(ExpenseSQLiteHelper.COLUMN_AMT, amount);
         contentValues.put(ExpenseSQLiteHelper.COLUMN_CATEGORY, category);
         contentValues.put(ExpenseSQLiteHelper.COLUMN_NOTE, note);
 
@@ -67,8 +70,9 @@ public class ExpensesDataSource {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        expenseData.setCategory(cursor.getString(2));
-        expenseData.setNote(cursor.getString(3));
+        expenseData.setAmount(cursor.getFloat(2));
+        expenseData.setCategory(cursor.getString(3));
+        expenseData.setNote(cursor.getString(4));
         return expenseData;
     }
 

@@ -1,13 +1,14 @@
+package com.coditsuisse.team60.expensetracker;
+
 import java.sql.Date;
 
 /**
  * Created by Kshitij on 9/12/2015.
  */
 
-public class ExpenseData {
+public class IncomeData {
     private long id;
     private Date date;
-    private String category;
     private String note;
 
     public long getId() {
@@ -15,9 +16,6 @@ public class ExpenseData {
     }
     public Date getDate()   {
         return date;
-    }
-    public String getCategory() {
-        return category;
     }
     public String getNote() {
         return note;
@@ -28,11 +26,7 @@ public class ExpenseData {
     public void setDate(Date date)  {
         this.date = date;
     }
-    public void setCategory(String category)    {
-        this.category = category;
-    }
     public void setNote(String note)    {
         this.note = note;
     }
-
 }

@@ -17,7 +17,7 @@
         android:ems="10"
         android:id="@+id/expense_amount"
         android:layout_gravity="center"
-        android:text="Expense"/>
+        android:hint="Expenses Amount" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -28,9 +28,17 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/others"
+                android:id="@+id/expense_others"
+                android:onClick="onRadioButtonClicked"
+                android:checked="true"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/foodndrinks"
                 android:id="@+id/expense_foodndrinks"
-                android:onClick="onRadioButtonClicked"/>
+                android:onClick="onRadioButtonClicked" />
 
             <RadioButton
                 android:layout_width="match_parent"
@@ -52,13 +60,6 @@
                 android:text="@string/transportation"
                 android:id="@+id/expense_transportation"
                 android:onClick="onRadioButtonClicked"/>
-
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/others"
-                android:id="@+id/expense_others"
-                android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
 
 
@@ -72,15 +73,16 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:id="@+id/expense_date"
-            android:text="@string/date"
-            android:onClick="showDatePickerDialog"/>
+            android:onClick="showDatePickerDialog"
+            android:hint="Set a date" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:id="@+id/expense_note"
-            android:text="@string/note"/>
+            android:hint="Note"
+            android:clickable="true" />
 
     </LinearLayout>
 
@@ -88,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_expense"
-        android:id="@+id/add_expense_button"/>
+        android:id="@+id/add_expense_button"
+        android:layout_gravity="right" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.coditsuisse.team60.expensetracker;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,15 +11,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class AddExpenseActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String category;
-
+    private String category = "Others";
+    private ExpensesDataSource expensesDataSource;
+    private Date date;
+    private String note;
+    float amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
+
+        expensesDataSource = new ExpensesDataSource(this);
+        expensesDataSource.open();
+
         Button button = (Button) findViewById(R.id.add_expense_button);
         button.setOnClickListener(this);
         EditText dateField = (EditText) findViewById(R.id.expense_date);
@@ -52,9 +67,22 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.add_expense_button:
                 final EditText amountField = (EditText) findViewById(R.id.expense_amount);
-                int amount = Integer.parseInt(amountField.getText().toString());
+                amount = Float.parseFloat(amountField.getText().toString());
                 final EditText noteField = (EditText) findViewById(R.id.expense_note);
-                String note = noteField.getText().toString();
+                note = noteField.getText().toString();
+                final EditText dateField = (EditText) findViewById(R.id.expense_date);
+                String dateString = dateField.getText().toString();
+
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                format.setTimeZone(TimeZone.getDefault());
+                try {
+                    date = new java.sql.Date(format.parse(dateString).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                expensesDataSource.createExpense(category, date, note, amount);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
                 break;
             case R.id.expense_date:
                 showDatePickerDialog(view);
