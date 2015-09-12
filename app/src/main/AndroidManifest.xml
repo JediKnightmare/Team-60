@@ -24,9 +24,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.coditsuisse.team60.expensetracker.MainActivity" />
         </activity>
+        <activity android:name=".MainActivity2"
+                  android:label="@string/title_activity_main2">
+        </activity>
         <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main2" >
+            android:name=".AddIncomeActivity"
+            android:label="@string/title_activity_add_income"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.coditsuisse.team60.expensetracker.MainActivity" />
         </activity>
     </application>
 

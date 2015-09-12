@@ -29,7 +29,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         month++;
         StringBuilder expenseDate = (new StringBuilder().append(day).append("/").append(month).append("/").append(year));
-        EditText dateField = (EditText) getActivity().findViewById(R.id.expense_date);
+        EditText dateField = (EditText) getActivity().findViewById(R.id.date);
         dateField.setText(expenseDate);
     }
 }

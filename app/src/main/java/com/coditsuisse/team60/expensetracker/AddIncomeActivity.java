@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import java.sql.Date;
 import java.text.DateFormat;
@@ -18,32 +17,27 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class AddExpenseActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddIncomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String category = "Others";
-    private ExpensesDataSource expensesDataSource;
+    float amount;
     private Date date;
     private String note;
-    float amount;
+    private IncomeDataSource incomeDataSource;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_expense);
+        setContentView(R.layout.activity_add_income);
 
-        expensesDataSource = new ExpensesDataSource(this);
-        expensesDataSource.open();
-
-        Button button = (Button) findViewById(R.id.add_expense_button);
+        Button button = (Button) findViewById(R.id.add_income_button);
         button.setOnClickListener(this);
-        EditText dateField = (EditText) findViewById(R.id.date);
-        dateField.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_expense, menu);
+        getMenuInflater().inflate(R.menu.menu_add_income, menu);
         return true;
     }
 
@@ -58,17 +52,16 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.add_expense_button:
-                final EditText amountField = (EditText) findViewById(R.id.expense_amount);
+            case R.id.add_income_button:
+                final EditText amountField = (EditText) findViewById(R.id.income_amount);
                 amount = Float.parseFloat(amountField.getText().toString());
-                final EditText noteField = (EditText) findViewById(R.id.expense_note);
+                final EditText noteField = (EditText) findViewById(R.id.income_note);
                 note = noteField.getText().toString();
                 final EditText dateField = (EditText) findViewById(R.id.date);
                 String dateString = dateField.getText().toString();
@@ -80,7 +73,7 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                expensesDataSource.createExpense(category, date, note, amount);
+                incomeDataSource.createIncome(date, note);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
@@ -90,35 +83,8 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-
-        switch (view.getId()) {
-            case R.id.expense_foodndrinks:
-                if (checked)
-                    category = "Food and Drinks";
-                break;
-            case R.id.expense_health:
-                if (checked)
-                    category = "Health";
-                break;
-            case R.id.expense_leisure:
-                if (checked)
-                    category = "Leisure";
-                break;
-            case R.id.expense_transportation:
-                if (checked)
-                    category = "Transportation";
-                break;
-            case R.id.expense_others:
-                if (checked)
-                    category = "Others";
-                break;
-        }
-    }
-
     public void showDatePickerDialog(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "expenseDatePicker");
+        newFragment.show(getFragmentManager(), "incomeDatePicker");
     }
 }

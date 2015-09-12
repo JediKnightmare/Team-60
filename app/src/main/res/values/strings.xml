@@ -7,7 +7,8 @@
 
     <string name="add">ADD</string>
 
-    <string name="add_expense">Save</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="add_income">Add Income</string>
     
     <string name="foodndrinks">Food and Drinks</string>
     <string name="health">Health</string>
@@ -18,8 +19,8 @@
     <string name="note">Note</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="app_title">Expense Manager</string>
-    <string name="add_income">Add Income</string>
     <string name="add_expenses">Add Expenses</string>
     <string name="list_transactions">List Transactions</string>
     <string name="view_statistics">View Statistics</string>
+    <string name="title_activity_add_income">AddIncomeActivity</string>
 </resources>

@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:id="@+id/expense_date"
+            android:id="@+id/date"
             android:onClick="showDatePickerDialog"
             android:hint="Set a date" />
 
