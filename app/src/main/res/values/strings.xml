@@ -16,4 +16,10 @@
     <string name="others">Others</string>
     <string name="date">Date</string>
     <string name="note">Note</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="app_title">Expense Manager</string>
+    <string name="add_income">Add Income</string>
+    <string name="add_expenses">Add Expenses</string>
+    <string name="list_transactions">List Transactions</string>
+    <string name="view_statistics">View Statistics</string>
 </resources>
