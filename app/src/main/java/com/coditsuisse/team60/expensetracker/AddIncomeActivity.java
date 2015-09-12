@@ -35,6 +35,9 @@ public class AddIncomeActivity extends AppCompatActivity implements View.OnClick
 
         Button button = (Button) findViewById(R.id.add_income_button);
         button.setOnClickListener(this);
+
+        EditText dateField = (EditText) findViewById(R.id.date);
+        dateField.setOnClickListener(this);
     }
 
     @Override
@@ -80,14 +83,14 @@ public class AddIncomeActivity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
-            case R.id.date1:
+            case R.id.date:
                 showDatePickerDialog(view);
                 break;
         }
     }
 
-    public void showDatePickerDialog(View view) {
+    private void showDatePickerDialog(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "incomeDatePicker");
+        newFragment.show(getFragmentManager(), "IncomeDatePicker");
     }
 }

@@ -117,8 +117,8 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public void showDatePickerDialog(View view) {
+    private void showDatePickerDialog(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "expenseDatePicker");
+        newFragment.show(getFragmentManager(), "ExpenseDatePicker");
     }
 }

@@ -23,4 +23,5 @@
     <string name="list_transactions">List Transactions</string>
     <string name="view_statistics">View Statistics</string>
     <string name="title_activity_add_income">AddIncomeActivity</string>
+    <string name="title_activity_list_transaction">ListTransaction</string>
 </resources>
