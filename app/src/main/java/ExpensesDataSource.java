@@ -14,13 +14,13 @@ import java.text.SimpleDateFormat;
 
 public class ExpensesDataSource {
     private SQLiteDatabase database;
-    private SQLiteHelper dbHelper;
+    private ExpenseSQLiteHelper dbHelper;
 
-    private String[] allColumns = { SQLiteHelper.COLUMN_ID,
-            SQLiteHelper.COLUMN_DATE, SQLiteHelper.COLUMN_CATEGORY, SQLiteHelper.COLUMN_NOTE };
+    private String[] allColumns = { ExpenseSQLiteHelper.COLUMN_ID,
+            ExpenseSQLiteHelper.COLUMN_DATE, ExpenseSQLiteHelper.COLUMN_CATEGORY, ExpenseSQLiteHelper.COLUMN_NOTE };
 
     public ExpensesDataSource(Context context) {
-        dbHelper = new SQLiteHelper(context);
+        dbHelper = new ExpenseSQLiteHelper(context);
     }
 
     public void open() throws SQLException {
@@ -34,26 +34,25 @@ public class ExpensesDataSource {
     public ExpenseData createExpense(String catergory, Date date, String note)  {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ContentValues contentValues = new ContentValues();
-        contentValues.put(SQLiteHelper.COLUMN_DATE, simpleDateFormat.format(date));
-        contentValues.put(SQLiteHelper.COLUMN_CATEGORY, catergory);
-        contentValues.put(SQLiteHelper.COLUMN_NOTE, note);
+        contentValues.put(ExpenseSQLiteHelper.COLUMN_DATE, simpleDateFormat.format(date));
+        contentValues.put(ExpenseSQLiteHelper.COLUMN_CATEGORY, catergory);
+        contentValues.put(ExpenseSQLiteHelper.COLUMN_NOTE, note);
 
-        long insertId = database.insert(SQLiteHelper.TABLE_expenses, null,
+        long insertId = database.insert(ExpenseSQLiteHelper.TABLE_expenses, null,
                 contentValues);
 
-        Cursor cursor = database.query(SQLiteHelper.TABLE_expenses,
-                allColumns, SQLiteHelper.COLUMN_ID + " = " + insertId, null,
+        Cursor cursor = database.query(ExpenseSQLiteHelper.TABLE_expenses,
+                allColumns, ExpenseSQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
         ExpenseData expenseData = cursorToExpenseData(cursor);
-
         return expenseData;
     }
 
     public void deleteExpenseData(ExpenseData expenseData) {
         long id = expenseData.getId();
         System.out.println("Expense deleted with id: " + id);
-        database.delete(SQLiteHelper.TABLE_expenses, SQLiteHelper.COLUMN_ID
+        database.delete(ExpenseSQLiteHelper.TABLE_expenses, ExpenseSQLiteHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
