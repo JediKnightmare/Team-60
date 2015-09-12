@@ -1,6 +1,6 @@
 package com.coditsuisse.team60.expensetracker;
 
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,12 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import java.util.Date;
-
 public class AddExpenseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String category;
-    static Date expenseDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +91,6 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
 
     public void showDatePickerDialog(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
-
-    public static void setDate(Date date) {
-        expenseDate = date;
+        newFragment.show(getFragmentManager(), "datePicker");
     }
 }
