@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kshitij on 9/12/2015.
@@ -46,6 +48,7 @@ public class ExpensesDataSource {
                 null, null, null);
         cursor.moveToFirst();
         ExpenseData expenseData = cursorToExpenseData(cursor);
+        cursor.close();
         return expenseData;
     }
 
@@ -67,5 +70,21 @@ public class ExpensesDataSource {
         expenseData.setCategory(cursor.getString(2));
         expenseData.setNote(cursor.getString(3));
         return expenseData;
+    }
+
+    public List<ExpenseData> getAllExpenses()   {
+        List<ExpenseData> expenseDataList = new ArrayList<ExpenseData>();
+        Cursor cursor = database.query(ExpenseSQLiteHelper.TABLE_expenses,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())   {
+            ExpenseData expenseData = cursorToExpenseData(cursor);
+            expenseDataList.add(expenseData);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return expenseDataList;
     }
 }

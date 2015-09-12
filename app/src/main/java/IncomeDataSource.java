@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kshitij on 9/12/2015.
@@ -65,5 +67,21 @@ public class IncomeDataSource {
         }
         incomeData.setNote(cursor.getString(2));
         return incomeData;
+    }
+
+    public List<IncomeData> getAllIncomes()   {
+        List<IncomeData> incomeDataList = new ArrayList<IncomeData>();
+        Cursor cursor = database.query(IncomeSQLiteHelper.TABLE_income,
+                allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())   {
+            IncomeData incomeData = cursorToIncomeData(cursor);
+            incomeDataList.add(incomeData);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return incomeDataList;
     }
 }
