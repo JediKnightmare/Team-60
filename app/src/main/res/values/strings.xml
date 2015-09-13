@@ -24,4 +24,8 @@
     <string name="view_statistics">View Statistics</string>
     <string name="title_activity_add_income">AddIncomeActivity</string>
     <string name="title_activity_list_transaction">ListTransaction</string>
+    <string name="summary_budget">Total Income</string>
+    <string name="summary_expenses">Total Expenses</string>
+    <string name="summary_liabilities">Outstanding Expenses</string>
+    <string name="summary_savings">Remaining Savings Target</string>
 </resources>

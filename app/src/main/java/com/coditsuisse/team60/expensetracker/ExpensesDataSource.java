@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,4 +92,30 @@ public class ExpensesDataSource {
         cursor.close();
         return expenseDataList;
     }
+
+    public float getExpensesCurrent()   {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        java.util.Date date = new java.util.Date();
+        float totalExpenses = 0;
+
+        String sql = "SELECT * from " + ExpenseSQLiteHelper.TABLE_expenses +
+                " where " + ExpenseSQLiteHelper.COLUMN_DATE + " LIKE '____-"+ dateFormat.format(date) + "%' AND " + ExpenseSQLiteHelper.COLUMN_DATE + " < DATE('now');";
+        System.out.println(sql);
+        Cursor cursor = database.rawQuery(sql, null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                ExpenseData expenseData = cursorToExpenseData(cursor);
+                totalExpenses += expenseData.getAmount();
+                System.out.println(expenseData.getAmount());
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+
+        return totalExpenses;
+    }
+
 }

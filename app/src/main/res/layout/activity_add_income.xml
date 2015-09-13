@@ -22,7 +22,9 @@
         android:inputType="date"
         android:id="@+id/date"
         android:hint="Set date"
-        android:clickable="true" />
+        android:clickable="true"
+        android:enabled="true"
+        android:editable="false" />
 
     <EditText
         android:layout_width="match_parent"

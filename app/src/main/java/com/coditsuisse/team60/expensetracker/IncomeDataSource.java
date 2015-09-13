@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,11 +66,11 @@ public class IncomeDataSource {
         IncomeData incomeData = new IncomeData();
         incomeData.setId(cursor.getLong(0));
         try {
-            incomeData.setDate(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(1)).getTime()));
+            incomeData.setDate(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(cursor.getString(2)).getTime()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        incomeData.setAmount(cursor.getFloat(2));
+        incomeData.setAmount(cursor.getFloat(1));
         incomeData.setNote(cursor.getString(3));
         return incomeData;
     }
@@ -87,5 +89,28 @@ public class IncomeDataSource {
 
         cursor.close();
         return incomeDataList;
+    }
+
+    public float getTotalIncomesCurrent()  {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        java.util.Date date = new java.util.Date();
+        float totalIncome = 0;
+
+        String sql = "SELECT * from " + IncomeSQLiteHelper.TABLE_income +
+                " where " + IncomeSQLiteHelper.COLUMN_DATE + " LIKE '____-"+ dateFormat.format(date) + "%';";
+        Cursor cursor = database.rawQuery(sql, null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                IncomeData incomeData = cursorToIncomeData(cursor);
+                totalIncome += incomeData.getAmount();
+                cursor.moveToNext();
+            }
+        }
+
+        cursor.close();
+
+        return totalIncome;
     }
 }

@@ -3,16 +3,44 @@ package com.coditsuisse.team60.expensetracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private IncomeDataSource incomeDataSource;
+    private ExpensesDataSource expensesDataSource;
+    private float totalIncome;
+    private float totalExpenses;
+    private float totalLiabilities;
+    private float savingsTarget;
+    private static TextView totalIncomeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        incomeDataSource = new IncomeDataSource(this);
+        incomeDataSource.open();
+        totalIncome = incomeDataSource.getTotalIncomesCurrent();
+        incomeDataSource.close();
+
+        Log.d("LOG", String.valueOf(totalIncome));
+
+        totalIncomeText = (TextView) findViewById(R.id.totalIncomeText);
+        totalIncomeText.setText("null");
+        //totalIncomeText.setText(String.valueOf(totalIncome));
+
+        expensesDataSource = new ExpensesDataSource(this);
+        expensesDataSource.open();
+        totalExpenses = expensesDataSource.getExpensesCurrent();
+        expensesDataSource.close();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

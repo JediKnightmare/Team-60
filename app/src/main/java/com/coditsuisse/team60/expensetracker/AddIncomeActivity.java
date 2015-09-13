@@ -24,7 +24,6 @@ public class AddIncomeActivity extends AppCompatActivity implements View.OnClick
     private String note;
     private IncomeDataSource incomeDataSource;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
