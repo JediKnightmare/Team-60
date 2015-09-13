@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private float totalLiabilities;
     private float savingsTarget;
     private static TextView totalIncomeText;
+    private static TextView totalExpenseText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
         totalIncome = incomeDataSource.getTotalIncomesCurrent();
         incomeDataSource.close();
 
-        Log.d("LOG", String.valueOf(totalIncome));
-
         totalIncomeText = (TextView) findViewById(R.id.totalIncomeText);
-        totalIncomeText.setText("null");
-        //totalIncomeText.setText(String.valueOf(totalIncome));
+        totalIncomeText.setText(String.valueOf(totalIncome));
 
         expensesDataSource = new ExpensesDataSource(this);
         expensesDataSource.open();
         totalExpenses = expensesDataSource.getExpensesCurrent();
         expensesDataSource.close();
+
+        totalExpenseText = (TextView) findViewById(R.id.totalExpenseText);
+        totalExpenseText.setText(String.valueOf(totalExpenses));
     }
 
 

@@ -108,7 +108,6 @@ public class ExpensesDataSource {
             while (!cursor.isAfterLast()) {
                 ExpenseData expenseData = cursorToExpenseData(cursor);
                 totalExpenses += expenseData.getAmount();
-                System.out.println(expenseData.getAmount());
                 cursor.moveToNext();
             }
         }
